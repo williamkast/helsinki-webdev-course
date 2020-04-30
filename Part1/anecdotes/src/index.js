@@ -9,6 +9,12 @@ const MaxVotes = ( {anecdotes, votes} ) => {
   const maxVotes = Math.max(...votes)
   const maxVotesLocation = votes.indexOf(maxVotes)
 
+  if (maxVotes === 0){
+    return(
+      <div> There are no votes yet </div>
+    )
+  }
+
   return (
     <div> {anecdotes[maxVotesLocation]} <br/> has {votes[maxVotesLocation]} votes </div>
   )
