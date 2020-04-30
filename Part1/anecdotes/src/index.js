@@ -1,7 +1,18 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Title = ({name}) => <h1> {name} </h1>
+
 const getRandom = () => Math.floor( Math.random() * 6)
+
+const MaxVotes = ( {anecdotes, votes} ) => {
+  const maxVotes = Math.max(...votes)
+  const maxVotesLocation = votes.indexOf(maxVotes)
+
+  return (
+    <div> {anecdotes[maxVotesLocation]} <br/> has {votes[maxVotesLocation]} votes </div>
+  )
+}
 
 const Button = ( {name, onClick} ) => <button onClick = {onClick}> {name} </button>
 
@@ -12,18 +23,24 @@ const App = (props) => {
   const shuffleAnecdote = () => setSelected(getRandom)
 
   const handleVotes = () => {
-
     const votesCopy = [...votes]
     votesCopy[selected] +=1
     setVotes(votesCopy)
   }
-      console.log(votes)
+
+
+
+  console.log(votes)
+
   return (
     <div>
-      {props.anecdotes[selected]} <br/> has {votes[selected]} votes
+      <Title name = "Anecdote of the day" />
+      {anecdotes[selected]} <br/> has {votes[selected]} votes
       <br/>
       <Button name = "Next Anecdote" onClick = {shuffleAnecdote} />
       <Button name = "Votes" onClick = {handleVotes} />
+      <Title name = "Anecdote with the most votes" />
+      <MaxVotes anecdotes = {anecdotes} votes = {votes} />
     </div>
   )
 }
