@@ -14,6 +14,12 @@ const Statistics = ({good, neutral, bad}) => {
 
   const percentPostitive = ((good/allClicks)*100+"%")
 
+  if(allClicks === 0) {
+    return(
+      <div> There are no clicks yet </div>
+    )
+  }
+
   return(
     <div>
       <Statistic name = "Good" value = {good} />
